@@ -1,0 +1,16 @@
+# Here you can define all your datasets by using simple YAML syntax.
+#
+# Documentation for this file format can be found in "The Data Catalog"
+# Link: https://docs.kedro.org/en/stable/data/data_catalog.html
+
+# conf/base/catalog.yml
+
+credit_raw:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/credit_risk_dataset.csv
+
+credit_processed:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/credit_processed.parquet
+
+
