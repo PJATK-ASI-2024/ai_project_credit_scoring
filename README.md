@@ -38,3 +38,34 @@ ai_credit_scoring/
 ├── requirements.txt
 ├── README.md
 └── LICENSE
+````
+
+---
+
+## 🧰 Technologie
+- **Python 3.10+**
+- **Kedro 1.0.0**
+- **pandas, numpy, scikit-learn, matplotlib**
+- **seaborn, xgboost**
+- **Git / GitHub**
+- *(opcjonalnie)* **Docker**, **VS Code / PyCharm**
+
+---
+
+
+
+
+## 👥 Członek zespołu
+
+| Imię i nazwisko | Rola w projekcie | GitHub login |
+|------------------|------------------|--------------|
+| **Maciej Wojdowski** | Data Scientist / ML Engineer | maciejwoj    |
+
+---
+
+## 🔗 Linki projektu
+- Repozytorium GitHub: [https://github.com/PJATK-ASI-2024/ai_project_credit_scoring](https://github.com/PJATK-ASI-2024/ai_project_credit_scoring)
+- Tablica zadań (GitHub Project): [https://github.com/orgs/PJATK-ASI-2024/projects](https://github.com/orgs/PJATK-ASI-2024/projects)
+- Dokumentacja:  `docs/architecture_diagram.png`
+
+---
