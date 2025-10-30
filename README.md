@@ -48,7 +48,6 @@ ai_credit_scoring/
 - **pandas, numpy, scikit-learn, matplotlib**
 - **seaborn, xgboost**
 - **Git / GitHub**
-- *(opcjonalnie)* **Docker**, **VS Code / PyCharm**
 
 ---
 
