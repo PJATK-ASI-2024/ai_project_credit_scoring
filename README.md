@@ -66,5 +66,6 @@ ai_credit_scoring/
 - Repozytorium GitHub: [https://github.com/PJATK-ASI-2024/ai_project_credit_scoring](https://github.com/PJATK-ASI-2024/ai_project_credit_scoring)
 - Tablica zadań (GitHub Project): [https://github.com/orgs/PJATK-ASI-2024/projects](https://github.com/orgs/PJATK-ASI-2024/projects)
 - Dokumentacja:  `docs/architecture_diagram.png`
-
+- 📘 Notebook EDA: `notebooks/EDA_teamX.ipynb`
+- 📄 Raport EDA: `docs/eda/eda_report.md`
 ---
