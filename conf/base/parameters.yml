@@ -1,0 +1,8 @@
+eda:
+  paths:
+    missing_png: "docs/eda/missingness.png"
+    corr_png: "docs/eda/correlation_heatmap.png"
+    num_dir: "docs/eda/numeric"
+    cat_dir: "docs/eda/categorical"
+    stats_json: "docs/eda/eda_stats.json"
+    report_md: "docs/eda/eda_report.md"
