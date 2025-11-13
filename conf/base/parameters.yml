@@ -6,3 +6,25 @@ eda:
     cat_dir: "docs/eda/categorical"
     stats_json: "docs/eda/eda_stats.json"
     report_md: "docs/eda/eda_report.md"
+
+preprocessing:
+  target: "loan_status"
+  id_col: "_row_id"
+
+  clean:
+    col_missing_thresh: 0.6
+    row_missing_thresh: 0.8
+    num_imputer: "median"
+    cat_imputer: "most_frequent"
+    outlier:
+      method: "iqr"
+      iqr_factor: 1.5
+      zscore_thresh: 3.0
+
+  validate:
+    scaled:
+      tol_mean: 1.0e-6
+      tol_std: 1.0e-3
+    split:
+      expected: [0.7, 0.15, 0.15]
+      tol: 0.03
