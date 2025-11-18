@@ -1,0 +1,22 @@
+{
+  "n_total": 32575,
+  "sizes": {
+    "train": 22801,
+    "val": 4887,
+    "test": 4887
+  },
+  "ratios": {
+    "train": 0.699953952417498,
+    "val": 0.15002302379125096,
+    "test": 0.15002302379125096
+  },
+  "expected": {
+    "train": 0.7,
+    "val": 0.15,
+    "test": 0.15
+  },
+  "ratios_within_tol": true,
+  "tolerance": 0.03,
+  "no_overlap_by": "_row_id",
+  "no_index_overlap": true
+}
