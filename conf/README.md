@@ -126,7 +126,7 @@ Testy obejmują:
 - stratified split  
 - walidacje pozytywne i negatywne  
 
---- 
+---
 
 # 👥 Autor
 
