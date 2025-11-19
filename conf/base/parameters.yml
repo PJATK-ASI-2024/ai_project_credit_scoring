@@ -28,3 +28,7 @@ preprocessing:
     split:
       expected: [0.7, 0.15, 0.15]
       tol: 0.03
+
+modeling:
+  target_column: "loan_status"
+

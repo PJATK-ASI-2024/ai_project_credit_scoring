@@ -37,3 +37,40 @@ split_quality_report:
 preprocessing_report:
   type: text.TextDataset
   filepath: docs/preprocessing_report.md
+
+
+baseline_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/baseline_model.pkl
+
+automl_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/automl_model.pkl
+
+custom_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/custom_model.pkl
+
+best_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/best_model.pkl
+
+baseline_metrics:
+  type: json.JSONDataset
+  filepath: data/08_reporting/baseline_metrics.json
+
+automl_metrics:
+  type: json.JSONDataset
+  filepath: data/08_reporting/automl_metrics.json
+
+custom_metrics:
+  type: json.JSONDataset
+  filepath: data/08_reporting/custom_metrics.json
+
+model_comparison:
+  type: json.JSONDataset
+  filepath: data/08_reporting/model_comparison.json
+
+automl_results:
+  type: pandas.CSVDataset
+  filepath: data/08_reporting/automl_results.csv
