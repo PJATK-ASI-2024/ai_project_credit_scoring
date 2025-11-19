@@ -5,7 +5,7 @@
 Celem projektu jest stworzenie systemu do **oceny ryzyka kredytowego (credit scoring)** z wykorzystaniem danych historycznych o klientach.  
 Model analizuje cechy takie jak wiek, dochód, długość zatrudnienia czy historia kredytowa, aby przewidzieć, czy klient jest **niskiego** czy **wysokiego ryzyka** kredytowego.
 
-Projekt ma charakter edukacyjny i prezentuje kompletny proces **ETL → Feature Engineering → Raportowanie** w architekturze opartej o **Kedro**.
+Projekt prezentuje kompletny proces **ETL → Feature Engineering → Modelowanie → Raportowanie**, zrealizowany w architekturze **Kedro Pipeline**.
 
 Dane pochodzą z:  
 🔗 **Credit Risk Dataset – Kaggle**  
@@ -13,146 +13,149 @@ https://www.kaggle.com/datasets/laotse/credit-risk-dataset
 
 ---
 
-# 📦 Zakres projektu
+# 📦 1. Zakres projektu
 
-🔧 **ETL i przetwarzanie danych (Kedro)**  
+## 🔧 ETL i przetwarzanie danych (Kedro)
 - ładowanie danych surowych  
-- kompleksowe czyszczenie  
-- imputacja braków  
-- walidacja pipeline’u  
-- generowanie raportu preprocessingowego (markdown)  
+- czyszczenie i imputacja  
+- walidacja jakości  
+- generowanie raportu preprocessingowego  
 
-🧠 **Feature Engineering**  
-- binning wieku (`person_age_bin`)  
-- binning dochodu (`person_income_bin`)  
-- usuwanie i przycinanie outlierów  
+## 🔎 Analiza eksploracyjna (EDA)
+- brakujące wartości  
+- korelacje  
+- rozkłady zmiennych  
+- raport EDA (`docs/eda/eda_report.md`)
 
-📊 **Raportowanie**  
-- raport preprocessingowy (`preprocessing_report.md`)  
-- notebook EDA
+## 🤖 Modelowanie (Moduł ML)
+Zaimplementowano pełny pipeline modelowania:
 
----
+### 1️⃣ Baseline – DummyClassifier  
+- model odniesienia  
+- zapis metryk: `baseline_metrics.json`
 
-# 🗂️ Struktura projektu
+### 2️⃣ AutoML-light (sklearn)  
+Automatyczne porównanie trzech modeli:
+- Logistic Regression  
+- RandomForest  
+- GradientBoosting  
 
-```
-ai_credit_scoring/
-├── conf/
-│   ├── base/                         # Config: katalog, parametry pipeline’u
-│   └── local/                        # Parametry lokalne (gitignore)
-│
-├── data/
-│   ├── 01_raw/                       # Dane surowe
-│   ├── 02_intermediate/              # Dane po czyszczeniu
-│   ├── 05_model_input/               # Train / val / test (po split)
-│   └── 08_reporting/                 # Raporty (preprocessing, EDA)
-│
-├── docs/
-│   ├── architecture_diagram.png      # Architektura systemu
-│   ├── eda/eda_report.md             # Raport z EDA
-│   └── preprocessing_report.md       # Raport z czyszczenia danych
-│
-├── notebooks/
-│   └── EDA_credit_scoring.ipynb      # Analiza eksploracyjna
-│
-├── src/ai_credit_scoring/
-│   ├── pipelines/
-│   │   └── preprocessing/            # Czyszczenie i przygotowanie danych
-│   ├── settings.py
-│   └── __init__.py
-│
-│
-├── README.md
-└── requirements.txt
-```
+Wyniki:
+- `automl_metrics.json`  
+- `automl_model.pkl`  
+- `automl_results.csv`  
+- wybór najlepszego modelu po F1-score
+
+### 3️⃣ Custom RandomForest  
+- ręcznie strojoną konfiguracja  
+- zapis metryk: `custom_metrics.json`
+
+### 4️⃣ Porównanie modeli  
+- wybór najlepszego modelu (`model_comparison.json`)
+
+### 5️⃣ Raport końcowy modelowania  
+- `docs/modeling_report.md`
+
 
 ---
 
-# 🧰 Technologie
+# 🧰 3. Technologie
 
-- **Python 3.10+**
+- **Python 3.12**
 - **Kedro 0.19+**
 - **pandas / numpy**
 - **scikit-learn**
-- **matplotlib / seaborn**
+- **matplotlib**
+- **Jupyter Notebook**
 - **Git / GitHub**
 
 ---
 
-# ⚙️ Pipeline przetwarzania danych
+# ⚙️ 4. Pipeline przetwarzania danych
 
-### 1️⃣ Czyszczenie danych (`clean_data`)
+## 1️⃣ Czyszczenie danych (`clean_data`)
 - konwersje typów  
-- usuwanie kolumn/wierszy z dużą liczbą braków  
-- imputacja medianą / most frequent  
-- sanity-checki:  
-  - wiek w zakresie **[18, 90]**  
-  - przycinanie 99. percentyla dla dochodu i historii kredytowej  
-- ogólny clipping IQR  
-- wymuszenie wieku jako **liczby całkowitej**  
-- binning:  
-  - `person_age_bin` → 18–25, 26–35, 36–45, 46–60, 60+  
-  - `person_income_bin` → kwantyle 0–20–40–60–80–95–100%  
-- dodanie `_row_id` (kontrola przecieków)  
+- imputacja braków  
+- sanity-checki  
+- clipping IQR  
+- binning wieku i dochodu  
+- dodanie `_row_id`  
 
-### 2️⃣ Skalowanie (`scale_data`)
+## 2️⃣ Skalowanie (`scale_data`)
 - StandardScaler dla zmiennych numerycznych
 
-### 3️⃣ Podział danych (`split_data`)
-- train (70%)  
-- validation (15%)  
-- test (15%)  
-- podział stratified (jeśli jest target)
+## 3️⃣ Podział danych (`split_data`)
+- train / validation / test  
+- podział stratified  
 
-### 4️⃣ Walidacje
+## 4️⃣ Walidacje
 - `validate_clean`  
 - `validate_scaled`  
 - `validate_split`  
 
-### 5️⃣ Raport preprocessingowy
-- generowany automatycznie: `docs/preprocessing_report.md`
-
----
-
-# 🧪 Testy jednostkowe
-
-Plik: `tests/test_nodes.py`
-
-Testy obejmują:
-
-- poprawność czyszczenia  
-- poprawność wieku i binów  
-- sprawdzenie skalowania  
-- stratified split  
-- walidacje pozytywne i negatywne  
-
---- 
-
-# 👥 Autor
-
-| Imię i nazwisko | Rola | GitHub |
-|------------------|---------------------------|---------|
-| **Maciej Wojdowski** | Data Scientist / ML Engineer | maciejwoj |
-
----
-
-# 🔗 Linki
-
-- Repozytorium:  
-  https://github.com/PJATK-ASI-2024/ai_project_credit_scoring
-
-- Tablica zadań (GitHub Projects):  
-  https://github.com/orgs/PJATK-ASI-2024/projects
-
-- Raport EDA:  
-  `docs/eda/eda_report.md`
-
-- Raport preprocessingowy:  
+## 5️⃣ Raport preprocessingowy
+- generowany automatycznie:  
   `docs/preprocessing_report.md`
 
+---
+
+# 🤖 5. Pipeline modelowania ML
+
+Pipeline modelowania zawiera:
+
+```
+baseline → automl → custom → evaluate
+```
+
+### Wyniki zapisują się do:
+
+```
+data/08_reporting/
+├── baseline_metrics.json
+├── automl_metrics.json
+├── automl_model.pkl
+├── automl_results.csv
+├── custom_metrics.json
+└── model_comparison.json
+```
 
 ---
 
-# 🏁 Status
-Projekt zawiera kompletny pipeline do czyszczenia danych wraz z raportowaniem i testami.  
-Etap modelowania ML zostanie dodany później.
+# 📈 6. Wizualizacje
+
+Znajdują się w `docs/plots/`:
+
+- **metrics_comparison.png** – porównanie metryk modeli  
+- **feature_importance.png** – ważność cech dla RandomForest  
+
+---
+
+# 📄 7. Raport końcowy
+
+Pełny raport modelowania:  
+➡ **docs/modeling_report.md**
+
+Zawiera:
+- metryki modeli  
+- porównanie jakości  
+- wykresy  
+- rekomendacje  
+
+---
+
+# 👥 9. Autor
+
+| Imię i nazwisko | Rola |
+|----------------|-------|
+| **Maciej Wojdowski** | Data Scientist / ML Engineer |
+
+---
+
+# 🏁 Status projektu
+
+Projekt zawiera kompletny pipeline:
+- EDA  
+- preprocessing  
+- modelowanie  
+- raportowanie  
+
