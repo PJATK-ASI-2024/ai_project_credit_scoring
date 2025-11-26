@@ -1,4 +1,3 @@
-"""Evaluation pipeline nodes for model testing and analysis."""
 
 from __future__ import annotations
 
@@ -35,20 +34,7 @@ def cross_validate_model(
     cv_scoring: str = "f1",
     random_state: int = 42,
 ) -> Dict[str, Any]:
-    """
-    Perform cross-validation on the model.
-    
-    Args:
-        model: Trained model object
-        train_data: Training dataset
-        target_column: Name of target column
-        cv_folds: Number of CV folds
-        cv_scoring: Scoring metric for CV
-        random_state: Random state for reproducibility
-        
-    Returns:
-        Dictionary with CV scores and statistics
-    """
+
     X = train_data.drop(columns=[target_column]).select_dtypes(include=[np.number])
     y = train_data[target_column]
     
@@ -73,17 +59,7 @@ def evaluate_on_test(
     test_data: pd.DataFrame,
     target_column: str,
 ) -> Metrics:
-    """
-    Evaluate model on test set.
-    
-    Args:
-        model: Trained model object
-        test_data: Test dataset
-        target_column: Name of target column
-        
-    Returns:
-        Dictionary with test metrics
-    """
+
     X_test = test_data.drop(columns=[target_column]).select_dtypes(include=[np.number])
     y_test = test_data[target_column]
     
@@ -107,14 +83,7 @@ def generate_confusion_matrix(
     test_data: pd.DataFrame,
     target_column: str,
 ) -> None:
-    """
-    Generate and save confusion matrix plot.
-    
-    Args:
-        model: Trained model object
-        test_data: Test dataset
-        target_column: Name of target column
-    """
+
     X_test = test_data.drop(columns=[target_column]).select_dtypes(include=[np.number])
     y_test = test_data[target_column]
     
@@ -155,15 +124,7 @@ def compute_feature_importance(
     target_column: str,
     top_n: int = 15,
 ) -> None:
-    """
-    Compute and save feature importance plot.
-    
-    Args:
-        model: Trained model with feature_importances_ attribute
-        train_data: Training dataset (for feature names)
-        target_column: Name of target column
-        top_n: Number of top features to display
-    """
+
     if not hasattr(model, "feature_importances_"):
         # Create empty plot if model doesn't support feature importance
         fig, ax = plt.subplots(figsize=(10, 6))
@@ -222,15 +183,7 @@ def compute_shap_values(
     target_column: str,
     max_samples: int = 100,
 ) -> None:
-    """
-    Compute and save SHAP values for model interpretability.
-    
-    Args:
-        model: Trained model
-        train_data: Training dataset
-        target_column: Name of target column
-        max_samples: Maximum number of samples for SHAP
-    """
+
     try:
         import shap
         
@@ -284,17 +237,7 @@ def create_model_version_log(
     model_name: str = "best_model.pkl",
     version: str = "1.0",
 ) -> pd.DataFrame:
-    """
-    Create a model version log entry.
-    
-    Args:
-        test_metrics: Dictionary of test metrics
-        model_name: Name of the model file
-        version: Version string
-        
-    Returns:
-        DataFrame with single row for this model version
-    """
+
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
     log_entry = {
@@ -317,18 +260,7 @@ def select_best_model(
     custom_model: Any,
     model_comparison: Dict[str, Any],
 ) -> Any:
-    """
-    Select the best model based on comparison results.
-    
-    Args:
-        baseline_model: Baseline model
-        automl_model: AutoML model
-        custom_model: Custom model
-        model_comparison: Model comparison dictionary
-        
-    Returns:
-        Best model object
-    """
+
     best_model_name = model_comparison["best_model_by_f1"]
     
     model_map = {
