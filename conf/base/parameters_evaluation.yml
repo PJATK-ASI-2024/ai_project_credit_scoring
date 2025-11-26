@@ -1,0 +1,8 @@
+# Evaluation pipeline parameters
+evaluation:
+  cv_folds: 5
+  cv_scoring: "f1"
+  random_state: 42
+  shap_max_samples: 100
+  model_name: "best_model.pkl"
+  version: "1.0"

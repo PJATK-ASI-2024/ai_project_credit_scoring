@@ -14,6 +14,11 @@ data/**
 
 # except their sub-folders
 !data/**/
+!data/**/*.dvc
+!data/08_reporting/*.json
+!data/08_reporting/*.csv
+
+
 
 # also keep all .gitkeep files
 !.gitkeep

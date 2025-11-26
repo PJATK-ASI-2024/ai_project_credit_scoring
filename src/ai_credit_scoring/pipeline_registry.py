@@ -7,6 +7,9 @@ from .pipelines.credit_scoring import (
     create_pipeline as create_credit_scoring_pipeline,
 )
 from .pipelines.eda import create_pipeline as create_eda_pipeline
+from .pipelines.evaluation import (
+    create_pipeline as create_evaluation_pipeline,
+)
 from .pipelines.modeling import (
     create_pipeline as create_modeling_pipeline,
 )
@@ -26,6 +29,7 @@ def register_pipelines() -> dict[str, Pipeline]:
         "eda": create_eda_pipeline(),
         "preprocessing": create_preprocessing_pipeline(),
         "modeling": create_modeling_pipeline(),
+        "evaluation": create_evaluation_pipeline(),
     }
 
     pipelines["__default__"] = sum(pipelines.values(), Pipeline([]))

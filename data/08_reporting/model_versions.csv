@@ -1,0 +1,2 @@
+timestamp,model_name,accuracy,f1_score,version
+2025-11-26 19:31:17,best_model.pkl,0.8766114180478821,0.6814580031695721,1.0

@@ -74,3 +74,16 @@ model_comparison:
 automl_results:
   type: pandas.CSVDataset
   filepath: data/08_reporting/automl_results.csv
+
+# Evaluation outputs
+test_metrics:
+  type: json.JSONDataset
+  filepath: data/08_reporting/test_metrics.json
+
+cv_scores:
+  type: json.JSONDataset
+  filepath: data/08_reporting/cv_scores.json
+
+model_versions:
+  type: pandas.CSVDataset
+  filepath: data/08_reporting/model_versions.csv
