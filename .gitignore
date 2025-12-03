@@ -165,3 +165,14 @@ venv.bak/
 
 # mlflow local runs
 mlruns/*
+
+# Airflow
+logs/*
+!logs/.gitkeep
+plugins/*
+!plugins/.gitkeep
+airflow.db
+airflow.cfg
+webserver_config.py
+standalone_admin_password.txt
+airflow-webserver.pid

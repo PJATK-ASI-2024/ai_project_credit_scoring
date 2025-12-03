@@ -1,8 +1,7 @@
 # 📊 Raport z Ewaluacji Modeli
 
 **Projekt**: AI Credit Scoring  
-**Data**: 2025-11-26  
-**Wersja Modelu**: 1.0
+
 
 ---
 
@@ -77,12 +76,10 @@ Spodziewane wyniki:
 
 ![Confusion Matrix](plots/confusion_matrix.png)
 
-> [!NOTE]
-> Wykres generuje się po odpaleniu `kedro run --pipeline evaluation`.
 
 **Moja analiza**:
-- **True Negatives** (Niskie Ryzyko → Niskie Ryzyko): Model super sobie radzi z bezpiecznymi klientami.
-- **True Positives** (Wysokie Ryzyko → Wysokie Ryzyko): Wykrywa większość ryzykownych, ale nie wszystkich.
+- **True Negatives** : Model super sobie radzi z bezpiecznymi klientami.
+- **True Positives** : Wykrywa większość ryzykownych, ale nie wszystkich.
 - **False Positives**: Czasami odrzuca dobrych klientów (zbyt ostrożny).
 - **False Negatives**: To jest największy problem - przepuszcza ryzykownych klientów.
 
@@ -117,8 +114,6 @@ Spodziewane wyniki:
 
 ![SHAP Summary](plots/shap_summary.png)
 
-> [!TIP]
-> SHAP pokazuje, jak każda cecha wpływa na konkretną predykcję.
 
 **Wnioski**:
 - **Długa historia kredytowa** ciągnie ocenę w stronę "Niskiego Ryzyka".
@@ -155,9 +150,7 @@ Spodziewane wyniki:
 
 ### Jak ulepszyć model?
 
-> [!WARNING]
-> **Trzeba poprawić Recall**
-> Obecnie 60% recallu to trochę mało. 40% ryzykownych klientów dostaje kredyt.
+
 
 1. **Zmiana progu (Threshold Tuning)**
    - Można obniżyć próg, żeby wyłapywać więcej ryzykownych.
@@ -169,10 +162,8 @@ Spodziewane wyniki:
 
 3. **Lepsze modele**
    - Spróbować XGBoost albo LightGBM.
-   - Może sieci neuronowe?
 
-4. **Jakość danych**
-   - Sprawdzić czy nie ma błędów w danych (outliery).
+
 
 ---
 
@@ -211,15 +202,3 @@ Spodziewane wyniki:
    git tag v1.0.0
    ```
 
----
-
-## 📌 Historia Wersji
-
-| Wersja | Data | Model | F1-Score | Notatki |
-|--------|------|-------|----------|---------|
-| 1.0 | 2025-11-26 | AutoML RF | 0.68 | Pierwsza wersja produkcyjna |
-
----
-
-**Autor**: Maciej Wojdowski  
-**Projekt**: AI Credit Scoring

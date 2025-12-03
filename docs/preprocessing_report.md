@@ -1,6 +1,6 @@
 # Preprocessing report
 
-_Generated: 2025-11-13 18:54:17_
+_Generated: 2025-12-03 18:25:37_
 
 ## 1) Cleaning - braki i zmiany
 - Wiersze / kolumny po cleaningu: 32575 / 15
@@ -45,7 +45,7 @@ _Generated: 2025-11-13 18:54:17_
 #### 1.4 Podsumowanie zmian w rozkladach
 - Wiek (`person_age`): usunieto nielogiczne wartosci skrajne (np. 144 lat), rozklad srodka (median/mean) pozostaje praktycznie bez zmian.
 - Dochod (`person_income`): ucinamy najbardziej skrajne dochody (milionowe wartosci), dzieki czemu max i odchylenie standardowe spadaja, a median/mean zmieniaja sie niewiele.
-- Dlugosc zatrudnienia (`person_emp_length`): wartosci typu 123 lata sa traktowane jako outliery i przycinane do 99. percentyla (ok. kilkanascie lat); wiekszosc obserwacji z przedzialu 0–15 pozostaje bez zmian.
+- Dlugosc zatrudnienia (`person_emp_length`): wartosci typu 123 lata sa traktowane jako outliery i przycinane do 99. percentyla (ok. kilkanascie lat); wiekszosc obserwacji z przedzialu 0â€“15 pozostaje bez zmian.
 - Kwota kredytu, oprocentowanie i wskazniki kredytowe (`loan_amnt`, `loan_int_rate`, `loan_percent_income`, `cb_person_cred_hist_length`): przyciete sa jedynie skrajne ogony, co redukuje wplyw pojedynczych ekstremalnych wartosci na model.
 
 ### 1.5 Nowe cechy binningowe (rozklad kategorii)

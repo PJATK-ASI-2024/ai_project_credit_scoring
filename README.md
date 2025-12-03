@@ -63,11 +63,13 @@ Wyniki:
 
 - **Python 3.12**
 - **Kedro 0.19+**
+- **Apache Airflow 2.9.0**
 - **pandas / numpy**
 - **scikit-learn**
 - **matplotlib**
 - **Jupyter Notebook**
 - **Git / GitHub**
+- **Docker / Docker Compose**
 
 ---
 
@@ -143,6 +145,45 @@ Zawiera:
 
 ---
 
+# 🔄 8. Orkiestracja z Apache Airflow
+
+Projekt wykorzystuje **Apache Airflow** do automatyzacji i orkiestracji pipeline'ów Kedro.
+
+## DAG: `kedro_project_pipeline`
+
+Przepływ zadań:
+```
+eda → preprocessing → modeling → evaluation
+```
+
+### Uruchomienie Airflow
+
+1. **Uruchom Docker Desktop**
+2. **Wystartuj Airflow:**
+   ```bash
+   cd e:\Projekty\ASI\ai-credit-scoring
+   docker-compose up -d
+   ```
+3. **Otwórz interfejs:**
+   - URL: http://localhost:8080
+   - Login: `admin` / `admin`
+
+### Dokumentacja
+
+- 📋 [AIRFLOW_SETUP.md](docs/AIRFLOW_SETUP.md) - Instrukcje krok po kroku
+- 📊 [airflow_report.md](docs/airflow_report.md) - Szczegółowy raport
+- 🎨 Screenshots: `docs/screenshots/`
+
+### Funkcjonalności
+
+✅ Automatyczne harmonogramowanie  
+✅ Monitoring wykonania pipeline'ów  
+✅ Retry przy błędach  
+✅ Historia wykonań i logów  
+✅ Integracja z Kedro  
+
+---
+
 # 👥 9. Autor
 
 | Imię i nazwisko | Rola |
@@ -157,5 +198,6 @@ Projekt zawiera kompletny pipeline:
 - EDA  
 - preprocessing  
 - modelowanie  
-- raportowanie  
+- raportowanie
+- **orkiestracja z Airflow** 🆕
 
