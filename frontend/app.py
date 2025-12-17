@@ -14,6 +14,10 @@ import os
 # === Konfiguracja ===
 API_URL = os.getenv("API_URL", "http://127.0.0.1:8000")
 
+# Render przekazuje sam hostname (bez https://) w property: host, więc musimy to obsłużyć
+if not API_URL.startswith("http"):
+    API_URL = f"https://{API_URL}"
+
 # === Ustawienia strony ===
 st.set_page_config(
     page_title="Credit Scoring - Ocena Ryzyka Kredytowego",

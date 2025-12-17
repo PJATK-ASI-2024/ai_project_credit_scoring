@@ -17,6 +17,8 @@ data/**
 !data/**/*.dvc
 !data/08_reporting/*.json
 !data/08_reporting/*.csv
+!data/06_models/best_model.pkl
+!data/02_intermediate/clean_data.csv
 
 
 
