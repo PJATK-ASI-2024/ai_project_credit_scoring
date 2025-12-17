@@ -1,0 +1,32 @@
+services:
+  # Backend Service
+  - type: web
+    name: ai-credit-scoring-backend
+    env: docker
+    dockerContext: .
+    dockerfilePath: app/Dockerfile
+    plan: free
+    region: frankfurt
+    numInstances: 1
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 8000
+
+  # Frontend Service
+  - type: web
+    name: ai-credit-scoring-frontend
+    env: docker
+    dockerContext: .
+    dockerfilePath: frontend/Dockerfile
+    plan: free
+    region: frankfurt
+    numInstances: 1
+    envVars:
+      - key: API_URL
+        fromService:
+          type: web
+          name: ai-credit-scoring-backend
+          property: url
+      - key: PORT
+        value: 8501

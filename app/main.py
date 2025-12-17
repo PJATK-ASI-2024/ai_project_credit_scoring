@@ -20,6 +20,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 MODEL_PATHS = [
     BASE_DIR / "data" / "06_models" / "best_model.pkl",
+    BASE_DIR / "data" / "reporting" / "best_model.pkl",
     BASE_DIR / "data" / "06_models" / "custom_model.pkl",
     BASE_DIR / "data" / "06_models" / "baseline_model.pkl",
 ]
