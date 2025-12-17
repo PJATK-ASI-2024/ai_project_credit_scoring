@@ -67,7 +67,8 @@ try:
     else:
         st.warning("⚠️ API odpowiada, ale może być problem")
 except requests.exceptions.ConnectionError:
-    st.error("❌ Nie można połączyć się z API. Upewnij się, że backend działa na http://127.0.0.1:8000")
+    st.error(f"❌ Nie można połączyć się z API. Próbowano połączyć z: {API_URL}")
+    st.info("Upewnij się, że backend działa i jest dostępny.")
     st.info("Uruchom backend komendą: `uvicorn app.main:app --reload`")
     st.stop()
 
