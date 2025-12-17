@@ -1,6 +1,6 @@
 # Preprocessing report
 
-_Generated: 2025-12-08 20:45:26_
+_Generated: 2025-12-17 15:39:54_
 
 ## 1) Cleaning - braki i zmiany
 - Wiersze / kolumny po cleaningu: 32575 / 15

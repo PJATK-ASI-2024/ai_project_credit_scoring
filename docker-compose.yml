@@ -72,6 +72,28 @@ services:
       airflow-init:
         condition: service_completed_successfully
 
+  backend:
+    build:
+      context: .
+      dockerfile: app/Dockerfile
+    ports:
+      - "8000:8000"
+    container_name: ai_backend
+    restart: always
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "8501:8501"
+    container_name: ai_frontend
+    environment:
+      - API_URL=http://backend:8000
+    depends_on:
+      - backend
+    restart: always
+
   airflow-init:
     <<: *airflow-common
     entrypoint: /bin/bash
