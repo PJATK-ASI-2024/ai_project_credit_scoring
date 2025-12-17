@@ -35,51 +35,5 @@ docker-compose up --build -d
 ```
 Parametr `-d` uruchamia kontenery w tle.
 
-Aby uruchomić **tylko** aplikację (Backend + Frontend):
-```bash
-docker-compose up --build -d backend frontend
-```
 
-### Ręczne budowanie obrazów (opcjonalnie)
-Backend:
-```bash
-docker build -t ai_project_backend -f app/Dockerfile .
-```
 
-Frontend:
-```bash
-docker build -t ai_project_frontend -f frontend/Dockerfile .
-```
-
----
-
-## 3. Linki do DockerHub
-
-Obrazy zostały przygotowane do wypchnięcia (push) na DockerHub.
-
-**Tagowanie obrazów:**
-```bash
-docker tag ai_project_backend maciejwoj/ai_project_backend:latest
-docker tag ai_project_frontend maciejwoj/ai_project_frontend:latest
-```
-
-**Publikacja:**
-```bash
-docker push maciejwoj/ai_project_backend:latest
-docker push maciejwoj/ai_project_frontend:latest
-```
-
-## 4. Wdrożenie w chmurze (Render.com)
-
-Projekt zawiera plik `render.yaml` (Blueprint), który automatyzuje wdrożenie backendu i frontendu.
-
-### Instrukcja wdrożenia:
-1.  Wypchnij kod projektu na swoje repozytorium GitHub.
-2.  Zaloguj się na [Render.com](https://render.com/).
-3.  Kliknij **New +** -> **Blueprint**.
-4.  Połącz swoje repozytorium GitHub.
-5.  Render wykryje plik `render.yaml` i zaproponuje utworzenie dwóch serwisów:
-    - `ai-credit-scoring-backend`
-    - `ai-credit-scoring-frontend`
-6.  Kliknij **Apply**.
-7.  Po zakończeniu budowania otrzymasz dwa linki. Aplikacja frontendowa automatycznie połączy się z backendem dzięki zmiennej środowiskowej `API_URL`.
