@@ -27,6 +27,6 @@ services:
         fromService:
           type: web
           name: ai-credit-scoring-backend
-          property: url
+          property: host
       - key: PORT
         value: 8501
