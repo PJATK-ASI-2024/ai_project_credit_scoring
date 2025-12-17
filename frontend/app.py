@@ -14,9 +14,16 @@ import os
 # === Konfiguracja ===
 API_URL = os.getenv("API_URL", "http://127.0.0.1:8000")
 
-# Render przekazuje sam hostname (bez https://) w property: host, więc musimy to obsłużyć
+# Render przekazuje sam hostname (bez https://) w property: host.
+# Jeśli otrzymujemy krótką nazwę usługi (np. "ai-credit-scoring-backend"),
+# musimy dodać domenę .onrender.com, aby połączyć się przez publiczny internet.
 if not API_URL.startswith("http"):
-    API_URL = f"https://{API_URL}"
+    if "." not in API_URL and "localhost" not in API_URL:
+        # Zakładamy środowisko Render i brak pełnej domeny
+        API_URL = f"https://{API_URL}.onrender.com"
+    else:
+        # Inny przypadek (np. localhost z env, lub pełna domena)
+        API_URL = f"https://{API_URL}"
 
 # === Ustawienia strony ===
 st.set_page_config(
